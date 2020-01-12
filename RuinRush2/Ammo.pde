@@ -9,8 +9,8 @@ class Ammo {
     void init() {
       ammo = loadImage("./Art/bullet.png");
       diameter = 10;
-      x = p.x + 55;
-      y = p.y;
+      x = player.x + 55;
+      y = player.y;
       vx = 30;
       damage = 5;
     }
@@ -30,8 +30,8 @@ class Ammo {
   class Bullet extends Projectile {
     void init() {
       diameter = 10;
-      x = p.x + 55;
-      y = p.y;
+      x = player.x + 55;
+      y = player.y;
       vx = 30;
       ammo = loadImage("./Art/bullet.png");
       damage = 5;
@@ -48,8 +48,8 @@ class Ammo {
   class Bolt extends Projectile {
     void init() {
       diameter = 20;
-      x = p.x + 55;
-      y = p.y;
+      x = player.x + 55;
+      y = player.y;
       vx = 30;
       ammo = loadImage("./Art/Bolt.png");
       damage = 20;
@@ -66,8 +66,8 @@ class Ammo {
   class ShotgunShell extends Projectile {
     void init(int dir) {
       diameter = 10;
-      x = p.x + 55;
-      y = p.y;
+      x = player.x + 55;
+      y = player.y;
       vx = 30;
       vy = dir;
       ammo = loadImage("./Art/Shell.png");

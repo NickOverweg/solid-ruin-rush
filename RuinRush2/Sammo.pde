@@ -8,11 +8,11 @@ class Sammo extends Pickup {
 
   //the effect that the pick up has
   void effect() {
-    if (p.shotgunAmmo < 5) {
-      p.shotgunAmmo += 5;
+    if (player.shotgunAmmo < 5) {
+      player.shotgunAmmo += 5;
     }
-    if (p.shotgunAmmo > 5) {
-      p.shotgunAmmo = 5;
+    if (player.shotgunAmmo > 5) {
+      player.shotgunAmmo = 5;
     }
     despawn(); //disappear after use
     sndManager.forcePlaySound(14);

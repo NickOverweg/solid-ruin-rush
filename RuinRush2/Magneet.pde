@@ -6,7 +6,7 @@ class Magneet extends Pickup
   }
 
   void effect() {
-    p.magneetTimer = 0;
+    player.magneetTimer = 0;
     despawn();
     sndManager.forcePlaySound(9);
   }

@@ -23,7 +23,7 @@ class Pickup {
         vx = _Speed;
   
         //this enables the effect when player touches the pickup
-        if (touchesPlayer(p))
+        if (touchesPlayer(player))
         {
           effect();
         }

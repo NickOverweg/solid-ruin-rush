@@ -113,7 +113,7 @@ class Player {
       }
     } else {
       if (invinciblePopupTimer <= 0) {
-        ScorePopup spp = new ScorePopup((int)p.x, (int)p.y, "Invincible");
+        ScorePopup spp = new ScorePopup((int)player.x, (int)player.y, "Invincible");
         scorePopupParticles.add(spp);
         invinciblePopupTimer = 0.5;
       }

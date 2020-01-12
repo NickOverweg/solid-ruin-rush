@@ -16,7 +16,7 @@ class Treasures extends Pickup {
   void update() {
     if (active) {
 
-      if (p.magneetTimer > 7) {
+      if (player.magneetTimer > 7) {
         //setting velocity
         vx = _Speed;
         vy = 0;
@@ -26,11 +26,11 @@ class Treasures extends Pickup {
           despawn();
         }
       } else {
-        float distanceToPlayer = sqrt(pow(p.x - x, 2) + pow(p.y - y, 2));
+        float distanceToPlayer = sqrt(pow(player.x - x, 2) + pow(player.y - y, 2));
 
         if (distanceToPlayer < width / 2) {
-          vx = ((p.x - x) / distanceToPlayer) * MAGNET_PULL_SPEED;
-          vy = ((p.y - y) / distanceToPlayer) * MAGNET_PULL_SPEED;
+          vx = ((player.x - x) / distanceToPlayer) * MAGNET_PULL_SPEED;
+          vy = ((player.y - y) / distanceToPlayer) * MAGNET_PULL_SPEED;
         } else {
           vx = _Speed;
           vy = 0;
@@ -38,7 +38,7 @@ class Treasures extends Pickup {
       }
 
       //this enables the effect when player touches the pickup
-      if (touchesPlayer(p))
+      if (touchesPlayer(player))
       {
         effect();
       }
@@ -62,7 +62,7 @@ class Treasures extends Pickup {
   //call to despawn pickup
   void despawn() {
     if (active) {
-      ScorePopup spp = new ScorePopup((int)p.x, (int)p.y, 5);
+      ScorePopup spp = new ScorePopup((int)player.x, (int)player.y, 5);
       scorePopupParticles.add(spp);
 
       x = -10 - (2*radius);

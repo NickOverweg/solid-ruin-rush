@@ -15,10 +15,14 @@ SuperText highscoreText = new SuperText();
 
 //Game
 Background bg = new Background();
-Player p = new Player();
+Player player = new Player();
 GameUI gui = new GameUI();
 Spawner s = new Spawner();
 
+//System
+IHighscore highscoreManager;
+
+//Images
 PImage spritesheet, enemySpritesheet;
 PImage tutorialImage;
 PImage roofImg;
@@ -88,6 +92,8 @@ void setup () {
   size(1280, 768);
   frameRate(60);
 
+  loadInterfaces();
+
   loadHighscore();
   sndManager = new SoundManager();
 
@@ -110,7 +116,7 @@ void setup () {
 
 
   bg.init();
-  p.init();
+  player.init();
   gui.init();
   s.init();
 
@@ -125,32 +131,23 @@ void setup () {
     sndManager.playSound(12);
 }
 
+private void loadInterfaces(){
+  //this will probably get its own class. 
+  highscoreManager = new HighscoreManager();
+  
+}
 
 public float distance(int x1, int x2, int y1, int y2) {
   return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
 }
 
-//Highscore shit
+//Highscore 
 void loadHighscore() {
-  //Load the suspicious txt file
-  String[] hs = loadStrings("definetlyNotHighscore.txt");
-
-  //Load the highscore
-  for (int i = 0; i < hs.length; i++) {
-    highscore = Integer.parseInt(hs[i], 2);
-  }
+  highscore = highscoreManager.loadHighscore();
 }
 
 void setHighscore(float h) {
-  //Change the highscore to new one
-  highscore = (int)h;
-  highscoreText.t = "Highscore\n" + highscore;
-
-  //Create array to save because for some odd reason we need an array
-  String[] hs = new String[] { "" + Integer.toBinaryString(highscore)};
-
-  //Save the array with only one element to a non suspicious txt file
-  saveStrings("definetlyNotHighscore.txt", hs);
+  highscoreManager.setHighscore(h);
 }
 
 //keyPressed to check if a key is being pressed
@@ -160,7 +157,7 @@ void keyPressed() {
   }
   if (keyCode == RIGHT) {
     right = 1;
-    p.animSpeed = 5;
+    player.animSpeed = 5;
   }
   if (keyCode == 88 && !xIsPressed) {
     firing = true;
@@ -174,7 +171,7 @@ void keyReleased() {
     jumping = false;
   if (keyCode == RIGHT) {
     right = 0;
-    p.animSpeed = 8;
+    player.animSpeed = 8;
   }
   if (keyCode == 88) {
     firing = false;
@@ -239,8 +236,10 @@ void updateGame() {
       resetGameData();
       sndManager.playSound(4);
     }
-   
+
     startText.update();
+    
+    
     
     if (keyCode == 'X' && !keyPressed) {
       _GameState = States.Game;
@@ -260,7 +259,7 @@ void updateGame() {
   case Game:
     sndManager.playSound(2);
     if (!_Tutorial) {
-      p.update();
+      player.update();
       bg.update();
       s.update();
       roofX += roofSpeed + _Speed;
@@ -343,7 +342,7 @@ void drawGame() {
     background(187, 235, 246);
     bg.draw();
     s.draw();
-    p.draw();
+    player.draw();
     image(roofImg, roofX, roofY);
     image(roofImg, roofX + roofImg.width, roofY);
 

@@ -6,14 +6,14 @@ class Obstakel { //<>// //<>//
 
   void init() {
    pickupSprite = spritesheet.get(384, 384, 40, 40);
-    y = height * 0.8 + p.radius - random(0, 200);
+    y = height * 0.8 + player.radius - random(0, 200);
     w = h = 100;
     x = width + w * 2;
   }
 
   void init(int s) {
      pickupSprite = spritesheet.get(384, 384, 40, 40);
-    y = height * 0.8 + p.radius;
+    y = height * 0.8 + player.radius;
     w = h = s;
     x = width + w * 2;
   }
@@ -26,10 +26,10 @@ class Obstakel { //<>// //<>//
   }
   
   boolean touchesPlayer() {
-    if (p.x > x - (p.radius / 2) &&            //right side p > left side pu
-      p.x < x + w + (p.radius / 2) &&          //left side p < right side pu
-      p.y > y - h - (p.radius / 2) &&          //bottom p > top pu
-      p.y < y + (p.radius / 2)) {              //top p < bot pu
+    if (player.x > x - (player.radius / 2) &&            //right side p > left side pu
+      player.x < x + w + (player.radius / 2) &&          //left side p < right side pu
+      player.y > y - h - (player.radius / 2) &&          //bottom p > top pu
+      player.y < y + (player.radius / 2)) {              //top p < bot pu
 //check hitbox      
 //      print("p.x:" + p.x + " p.y:" + p.y + " x:" + x +  " y:" + y + " w/h:" + w + "/" + h + " p.rad:" + p.radius); 
       return true;
@@ -102,7 +102,7 @@ class Obstakel { //<>// //<>//
     checkHit();
 
     if (touchesPlayer()) {
-      p.playerDeath();
+      player.playerDeath();
     }
     
     if (x < -10 - w){

@@ -8,11 +8,11 @@ class Cammo extends Pickup {
 
   //the effect that the pick up has
   void effect() {
-    if (p.crossbowAmmo < 5) {
-      p.crossbowAmmo += 5;
+    if (player.crossbowAmmo < 5) {
+      player.crossbowAmmo += 5;
     }
-    if (p.crossbowAmmo > 5) {
-      p.crossbowAmmo = 5;
+    if (player.crossbowAmmo > 5) {
+      player.crossbowAmmo = 5;
     }
     sndManager.forcePlaySound(14);
     despawn(); //disappear after use

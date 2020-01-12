@@ -15,10 +15,10 @@ class Enemy {
   }
 
   boolean touchesPlayer() {
-    if (p.x > x - p.radius &&            //right side p > left side pu
-      p.x < x + w + p.radius &&          //left side p < right side pu
-      p.y > y - h - p.radius &&          //bottom p > top pu
-      p.y < y + p.radius) {              //top p < bot pu
+    if (player.x > x - player.radius &&            //right side p > left side pu
+      player.x < x + w + player.radius &&          //left side p < right side pu
+      player.y > y - h - player.radius &&          //bottom p > top pu
+      player.y < y + player.radius) {              //top p < bot pu
       return true;
     } else 
     return false;
@@ -102,14 +102,14 @@ class Enemy {
     checkHit();
 
     if (touchesPlayer() && HP > 0) {
-      p.playerDeath();
+      player.playerDeath();
     }
   }
 
   void despawn() {
     x = -10 - w;
 
-    ScorePopup spp = new ScorePopup((int)p.x, (int)p.y, 25);
+    ScorePopup spp = new ScorePopup((int)player.x, (int)player.y, 25);
     scorePopupParticles.add(spp);
 
     s.removeme.add(this);
@@ -158,11 +158,11 @@ class Enemy1 extends Enemy {
       enemy = enemySpritesheet.get(128, 0, 128, 97);
     }
 
-    if (distance((int)x, (int)p.x, (int)y, (int)p.y) < 200 && !p.OnGround() && onGround())
+    if (distance((int)x, (int)player.x, (int)y, (int)player.y) < 200 && !player.OnGround() && onGround())
       vy -= 15;
 
     if (touchesPlayer() && HP > 0)
-      p.playerDeath();
+      player.playerDeath();
 
     x += _Speed;
     y += vy;

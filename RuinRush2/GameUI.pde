@@ -30,31 +30,31 @@ class GameUI {
 
     switch(_CurWeapon) {
     case Handgun:
-      if (p.handgunAmmo != 0)
-        magazineText.t = "Bullets: " + p.handgunAmmo;
+      if (player.handgunAmmo != 0)
+        magazineText.t = "Bullets: " + player.handgunAmmo;
       else 
       magazineText.t = "Bullets: RELOADING";
       break;
     case Shotgun:
-      magazineText.t = "Shells: " + p.shotgunAmmo;
+      magazineText.t = "Shells: " + player.shotgunAmmo;
       break;
     case Crossbow:
-      magazineText.t = "Bolts: " + p.crossbowAmmo;
+      magazineText.t = "Bolts: " + player.crossbowAmmo;
       break;
     }
 
     //Update the amount of collected treasures
     treasuresText.t = "Treasures: " + Math.round(_TreasureCollected)+ "";
 
-    if (p.magneetTimer <= 7) 
-      magneetText.t = "Magnet Power: " + round(7 - p.magneetTimer);
+    if (player.magneetTimer <= 7) 
+      magneetText.t = "Magnet Power: " + round(7 - player.magneetTimer);
     else
       magneetText.t = "";  
 
-    if (p.invincibleTimer <= 3) 
-      invincibleText.t = "Jewel breaks! Invincible for: " + round(3 - p.invincibleTimer);
+    if (player.invincibleTimer <= 3) 
+      invincibleText.t = "Jewel breaks! Invincible for: " + round(3 - player.invincibleTimer);
     else
-      invincibleText.t = "Jewels: " + p.lifes;
+      invincibleText.t = "Jewels: " + player.lifes;
   }
 
   void draw () {

@@ -5,11 +5,11 @@ class Juweel extends Pickup {
   }
   
   void effect() {
-    if(p.lifes == 1){
-      ScorePopup spp = new ScorePopup((int)p.x, (int)p.y, 1000);
+    if(player.lifes == 1){
+      ScorePopup spp = new ScorePopup((int)player.x, (int)player.y, 1000);
       scorePopupParticles.add(spp);
     }else{
-    p.lifes = 1;
+    player.lifes = 1;
     }
     sndManager.forcePlaySound(14);
     despawn(); //disappear after use

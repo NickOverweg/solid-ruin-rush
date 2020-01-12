@@ -17,7 +17,7 @@ class Potion extends Pickup {
       x += vx;
 
       //this enables the effect when player touches the pickup
-      if (touchesPlayer(p))
+      if (touchesPlayer(player))
       {
         effect();
       }
