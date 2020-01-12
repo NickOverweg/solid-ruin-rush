@@ -1,5 +1,5 @@
 class HighscoreManager implements IHighscore{
-  int loadHighscore() {
+  int loadHighscore() { 
     //Load the suspicious txt file
     String[] hs = loadStrings("definetlyNotHighscore.txt");
     int highscore = 0;
