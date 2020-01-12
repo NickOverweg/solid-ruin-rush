@@ -21,7 +21,7 @@ void loadPrefabs(){
 
 void loadPrefab(int prefabNum){
   
-  PImage prefab = prefabs.get(25);
+  PImage prefab = prefabs.get(prefabNum);
   
   //check every pixel from left to right
   for(int ix = 0; ix < prefab.width; ix++){
