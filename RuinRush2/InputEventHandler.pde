@@ -6,53 +6,36 @@ class InputEventHandler implements IInputEventHandler{
   }
   
   //keyPressed to check if a key is being pressed
-  void keyPressed() {  
-    if (keyCode == UP) {
-      jumping = true;
-    }
-    if (keyCode == RIGHT) {
-      right = 1;
-      player.animSpeed = 5;
-    }
-    if (keyCode == 88 && !xIsPressed) {
-      firing = true;
-      xIsPressed = true;
-    }
+  public void keyPressed() {  
+    if(actionHandler == null) return;
+    
+    informActionHandler(true);
   }
   
   //keyReleased to check if a key is being released
-  void keyReleased() {
-    if (keyCode == UP)
-      jumping = false;
-    if (keyCode == RIGHT) {
-      right = 0;
-      player.animSpeed = 8;
-    }
-    if (keyCode == 88) {
-      firing = false;
-      xIsPressed = false;
-    }
+  public void keyReleased() {
+    if(actionHandler == null) return; 
   
-    //Switch weapon
-    if (keyCode == 90 && _GameState == States.Game && !_Tutorial) {
-      switch(_CurWeapon) {
-      case Handgun:
-        _CurWeapon = Weapons.Shotgun;
-        sndManager.forcePlaySound(22);
-        break;
-      case Shotgun:
-        _CurWeapon = Weapons.Crossbow;
-        sndManager.forcePlaySound(21);
-        break;
-      case Crossbow:
-        _CurWeapon = Weapons.Handgun;
-        sndManager.forcePlaySound(1);
-        break;
-      }
-    }
+    informActionHandler(false);
   }
   
-  void mouseReleased () {
-    _MouseReleased = true;
+  public void mouseReleased () {
+    actionHandler.releaseMouse();
+  }
+  
+  private void informActionHandler(Boolean Pressed){
+    switch(keyCode){
+      case UP:
+        actionHandler.jump(Pressed);
+        break;
+      case RIGHT:
+        actionHandler.run(Pressed);
+        break;
+      case 88: //x
+        actionHandler.shoot(Pressed);
+        break;
+      case 90: //z
+        actionHandler.swapWeapon(Pressed);
+    }
   }
 }

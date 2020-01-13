@@ -1,6 +1,7 @@
 interface IActionHandler{
-  public void Jump(Boolean setPressed);
-  public void Run(Boolean setPressed);
-  public void Shoot(Boolean setPressed);
-  public void SwapWeapon(Boolean setPressed);
+  public void jump(Boolean setPressed);
+  public void run(Boolean setPressed);
+  public void shoot(Boolean setPressed);
+  public void swapWeapon(Boolean setPressed);
+  public void releaseMouse();
 }
