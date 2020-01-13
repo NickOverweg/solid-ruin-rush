@@ -23,7 +23,7 @@ Spawner s = new Spawner();
 IHighscore highscoreManager;
 IActionHandler actionHandler;
 IInputEventHandler inputHandler;
-public GameManager gameManager = new GameManager();
+IGameObjectManager gameObjectManager;
 
 //Images
 PImage spritesheet, enemySpritesheet;
@@ -96,37 +96,13 @@ void setup () {
   frameRate(60);
 
   loadInterfaces();
-
   loadHighscore();
+  
   sndManager = new SoundManager();
 
   _CurWeapon = Weapons.Handgun;
 
-  //Init for Splash stuff
-  corendonLogo.set(width / 2, -200, "./Art/SplashScreen/Corendon-Logo.jpg", 1, 255);
-  splash.init();
-  tutorialImage = loadImage("./Art/SplashScreen/Tutorial.png");
-
-  //Init for Menu stuff
-  menuTitle.set(width / 2, 100, "Ruin Rush", 150, color(255, 255, 255), 4);
-  startText.set(width / 2, height / 2, "PRESS [X] TO START\nPRESS [Z] FOR HELP", 40, color(255, 255, 255), 4);
-  highscoreText.set(width / 2, 600, "Highscore\n" + highscore, 50, color(255, 255, 255), 4);
-
-  //Init for Game stuff
-  spritesheet = loadImage("./Art/spsh_PlayerPickups.png");
-  enemySpritesheet = loadImage("./Art/spsh_enemies.png");
-  roofImg = loadImage("./Art/Roof.png");
-
-
-  bg.init();
-  player.init();
-  gui.init();
-  s.init();
-
-  //Init for EndScreen stuff
-  endTitle.set(width / 2, 100, "YOU DIED", 150, color(255, 0, 0), 4);
-  backText.set(width / 2, height / 2, "PRESS [X] TO GO BACK", 40, color(255, 255, 255), 4);
-  scoreText.set(width / 2, 250, "Score: " + dispScore, 50, color(255, 255, 255), 4);
+  initializingObjects();
 
   loadPrefabs();
 
@@ -141,11 +117,12 @@ private void loadInterfaces(){
   actionHandler = new InputActionHandler();
   inputHandler = new InputEventHandler();
   inputHandler.setActionHandler(actionHandler);
+  
+  gameObjectManager = new GameObjectManager();
 }
 
-
-
-//Highscore 
+//TODO find beter place for this
+//Highscore  
 void loadHighscore() {
   highscore = highscoreManager.loadHighscore();
 }
@@ -164,6 +141,35 @@ void keyReleased(){
 
 void mouseReleased(){
   inputHandler.mouseReleased();
+}
+
+//these are all concrete implementations, abstracting this seems not worth the time. 
+//it does need to be moved somewhere else.
+void initializingObjects(){
+  //Init for Splash stuff
+  corendonLogo.set(width / 2, -200, "./Art/SplashScreen/Corendon-Logo.jpg", 1, 255);
+  splash.init();
+  tutorialImage = loadImage("./Art/SplashScreen/Tutorial.png");
+
+  //Init for Menu stuff
+  menuTitle.set(width / 2, 100, "Ruin Rush", 150, color(255, 255, 255), 4);
+  startText.set(width / 2, height / 2, "PRESS [X] TO START\nPRESS [Z] FOR HELP", 40, color(255, 255, 255), 4);
+  highscoreText.set(width / 2, 600, "Highscore\n" + highscore, 50, color(255, 255, 255), 4);
+
+  //Init for Game stuff
+  spritesheet = loadImage("./Art/spsh_PlayerPickups.png");
+  enemySpritesheet = loadImage("./Art/spsh_enemies.png");
+  roofImg = loadImage("./Art/Roof.png");
+
+  bg.init();
+  player.init();
+  gui.init();
+  s.init();
+
+  //Init for EndScreen stuff
+  endTitle.set(width / 2, 100, "YOU DIED", 150, color(255, 0, 0), 4);
+  backText.set(width / 2, height / 2, "PRESS [X] TO GO BACK", 40, color(255, 255, 255), 4);
+  scoreText.set(width / 2, 250, "Score: " + dispScore, 50, color(255, 255, 255), 4);
 }
 
 //Reset all data
@@ -203,8 +209,6 @@ void updateGame() {
     }
 
     startText.update();
-    
-    
     
     if (keyCode == 'X' && !keyPressed) {
       _GameState = States.Game;

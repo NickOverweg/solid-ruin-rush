@@ -1,4 +1,4 @@
-public class GameObjectManager{
+public class GameObjectManager implements IGameObjectManager{
   ArrayList<IGameObject> gameObjects;
   ArrayList<IGameObject> removableObjects;
   
@@ -14,8 +14,7 @@ public class GameObjectManager{
     
     for(IGameObject gObject : gameObjects){
       gObject.update();
-    }
-    
+    } 
   }
   
   //this should probably be hidden from other objects, but I need to call it from outside of this class.
@@ -37,6 +36,5 @@ public class GameObjectManager{
     for(IGameObject gObject : removableObjects){
       gameObjects.remove(gObject);
     }
-    
   }
 }

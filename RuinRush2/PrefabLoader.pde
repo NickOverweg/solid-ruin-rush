@@ -11,7 +11,6 @@ int blockPosY;
 int prefabAmount = 37;
 
 void loadPrefabs(){
-  
   for(int i=0; i < prefabAmount; i++){
     PImage aPrefab = loadImage("./Art/Prefabs/"+ i +".png");
     prefabs.add(aPrefab); 

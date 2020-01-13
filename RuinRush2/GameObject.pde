@@ -1,5 +1,9 @@
 public class GameObject implements IGameObject{
   
+  public GameObject(){
+    
+  }
+  
   private Boolean isEnabled;
   
   public void destroyObject(){
