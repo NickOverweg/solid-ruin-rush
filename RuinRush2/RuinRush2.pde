@@ -23,6 +23,7 @@ Spawner s = new Spawner();
 IHighscore highscoreManager;
 IActionHandler actionHandler;
 IInputEventHandler inputHandler;
+public GameManager gameManager = new GameManager();
 
 //Images
 PImage spritesheet, enemySpritesheet;
@@ -142,15 +143,12 @@ private void loadInterfaces(){
   inputHandler.setActionHandler(actionHandler);
 }
 
-public float distance(int x1, int x2, int y1, int y2) {
-  return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
-}
+
 
 //Highscore 
 void loadHighscore() {
   highscore = highscoreManager.loadHighscore();
 }
-
 void setHighscore(float h) {
   highscoreManager.setHighscore(h);
 }

@@ -158,7 +158,7 @@ class Enemy1 extends Enemy {
       enemy = enemySpritesheet.get(128, 0, 128, 97);
     }
 
-    if (distance((int)x, (int)player.x, (int)y, (int)player.y) < 200 && !player.OnGround() && onGround())
+    if (DistanceCalc.getDistance((int)x, (int)player.x, (int)y, (int)player.y) < 200 && !player.OnGround() && onGround())
       vy -= 15;
 
     if (touchesPlayer() && HP > 0)
